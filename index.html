@@ -608,27 +608,55 @@
 </div>
 
 <script>
-  // Nova lógica: hitbox reduzida para hover
-  const overlays = document.querySelectorAll('.interactive-overlay');
+  // Interação espectro: mouse e toque na hitbox
   const gifs = document.querySelectorAll('.spectrum-gif');
   const overlayImages = document.querySelectorAll('.overlay-image');
   const hitboxes = document.querySelectorAll('.overlay-image-hitbox');
 
-  hitboxes.forEach(hitbox => {
-    const video = hitbox.getAttribute('data-video');
+  function showGifAndLine(video) {
+    gifs.forEach(g => g.style.display = 'none');
+    overlayImages.forEach(i => i.style.display = 'none');
     const gifElement = document.getElementById(`gif-${video}`);
     const imgElement = document.getElementById(`img-${video}`);
+    if (gifElement) gifElement.style.display = 'block';
+    if (imgElement) imgElement.style.display = 'block';
+  }
+  function hideGifAndLine(video) {
+    const gifElement = document.getElementById(`gif-${video}`);
+    const imgElement = document.getElementById(`img-${video}`);
+    if (gifElement) gifElement.style.display = 'none';
+    if (imgElement) imgElement.style.display = 'none';
+  }
+
+  hitboxes.forEach(hitbox => {
+    const video = hitbox.getAttribute('data-video');
+    // Mouse
     hitbox.addEventListener('mouseenter', () => {
-      gifs.forEach(g => g.style.display = 'none');
-      overlayImages.forEach(i => i.style.display = 'none');
-      gifElement.style.display = 'block';
-      imgElement.style.display = 'block';
+      showGifAndLine(video);
     });
     hitbox.addEventListener('mouseleave', () => {
-      gifElement.style.display = 'none';
-      imgElement.style.display = 'none';
+      hideGifAndLine(video);
     });
+    // Touch
+    hitbox.addEventListener('touchstart', function(e) {
+      e.preventDefault();
+      showGifAndLine(video);
+    }, {passive: false});
+    hitbox.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      hideGifAndLine(video);
+    }, {passive: false});
   });
+
+  // Impede seleção da imagem espectro no mobile
+  const bgSpectra = document.querySelector('.background-spectra');
+  if (bgSpectra) {
+    bgSpectra.setAttribute('draggable', 'false');
+    bgSpectra.style.userSelect = 'none';
+    bgSpectra.addEventListener('touchstart', function(e) {
+      e.preventDefault();
+    }, {passive: false});
+  }
 </script>
 
 

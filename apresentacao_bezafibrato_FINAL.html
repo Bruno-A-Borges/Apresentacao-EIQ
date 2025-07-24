@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação: Transição Polimórfica do Bezafibrato</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif; /* Fonte mais agradável */
+            line-height: 1.8; /* Aumenta o espaçamento entre linhas */
+            color: #333;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #004080;
+            color: #fff;
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 5px solid #ff8c00;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em; /* Aumenta o tamanho do título principal */
+            font-weight: 700;
+        }
+        header p {
+            margin: 0.5em 0 0 0;
+            font-style: italic;
+            font-size: 1.1em;
+        }
+        .container {
+            width: 85%; /* Aumenta a largura do container */
+            max-width: 1200px; /* Limita a largura máxima */
+            margin: 2rem auto;
+            background: #fff;
+            padding: 2.5rem; /* Aumenta o padding */
+            box-shadow: 0 0 20px rgba(0,0,0,0.15); /* Sombra mais pronunciada */
+            border-radius: 10px;
+            min-height: 600px; /* Altura mínima para consistência */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .slide {
+            display: none;
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .slide-nav {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .slide-nav button {
+            background-color: #004080;
+            color: #fff;
+            border: none;
+            padding: 0.8em 2.5em; /* Botões maiores */
+            margin: 0 1em;
+            font-size: 1.1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease; /* Transição suave */
+        }
+        .slide-nav button:hover:not(:disabled) {
+            background-color: #ff8c00;
+            transform: translateY(-2px);
+        }
+        .slide-nav button:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+        h2 {
+            color: #004080;
+            border-bottom: 3px solid #ff8c00; /* Borda mais grossa */
+            padding-bottom: 0.7rem;
+            margin-top: 0;
+            font-size: 1.8em; /* Títulos de slide maiores */
+            font-weight: 600;
+        }
+        .flex-container {
+            display: flex;
+            gap: 2rem; /* Aumenta o espaçamento */
+            align-items: center; /* Centraliza verticalmente */
+            flex-wrap: wrap; /* Permite quebra de linha em telas menores */
+        }
+        .flex-container .text {
+            flex: 1;
+            min-width: 300px; /* Garante que o texto não fique muito estreito */
+            font-size: 1.1em; /* Aumenta o tamanho da fonte do texto */
+        }
+        .flex-container .image {
+            flex: 1;
+            text-align: center;
+            min-width: 300px; /* Garante que a imagem não fique muito estreita */
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px; /* Bordas mais arredondadas */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15); /* Sombra mais pronunciada */
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .caption {
+            font-size: 0.95em; /* Legendas um pouco maiores */
+            color: #555;
+            margin-top: 0.8rem;
+            text-align: center;
+        }
+        ul {
+            list-style-type: none; /* Remove marcadores padrão */
+            padding-left: 0;
+        }
+        li {
+            margin-bottom: 0.8em;
+            position: relative;
+            padding-left: 25px; /* Espaço para marcador customizado */
+        }
+        li::before {
+            content: '•'; /* Marcador customizado */
+            color: #ff8c00; /* Cor do marcador */
+            font-size: 1.2em;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .references a {
+            color: #004080;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .references a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+            background-color: #333;
+            color: #fff;
+            font-size: 0.9em;
+        }
+        /* Estilo específico para o esquema de pré-processamento */
+        .preprocessing-scheme {
+            display: flex;
+            flex-direction: row; /* Alterado para linha */
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            justify-content: center; /* Centraliza horizontalmente */
+        }
+        .preprocessing-scheme .step {
+            display: flex;
+            flex-direction: column; /* Imagens e legendas em coluna */
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .preprocessing-scheme .step img {
+            max-width: 250px; /* Tamanho fixo para as imagens */
+            height: auto;
+        }
+        .preprocessing-scheme .arrow {
+            font-size: 1.2em; /* Tamanho da fonte menor */
+            color: #004080;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.2;
+        }
+        .polymorphism-forms {
+            display: flex;
+            justify-content: space-around;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .polymorphism-forms .form-type {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .polymorphism-forms .form-type h3 {
+            color: #004080;
+            margin-top: 0;
+        }
+        .polymorphism-forms .form-type .image-placeholder {
+            height: 150px; /* Espaço para imagem */
+            background-color: #e0e0e0;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-style: italic;
+        }
+        .cover-slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+        }
+        .cover-slide img {
+            max-width: 80%;
+            height: auto;
+            margin-bottom: 2rem;
+        }
+        .cover-slide p {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #004080;
+            }
+    .interactive-spectra-container {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+    }
+    .spectra-section {
+      flex: 2;
+      position: relative;
+    }
+    .spectra-section img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .interactive-overlay {
+      position: absolute;
+      top: 0%;
+      width: 60px;
+      height: 587px;
+      left: 48px;
+      cursor: pointer;
+      padding: 0;
+      background: transparent;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+    .overlay-image {
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 196px;
+      height: 587px;
+      object-fit: contain;
+      display: none;
+      pointer-events: none; /* imagem não recebe eventos diretamente */
+    }
+    .interactive-overlay {
+      /* ...existing code... */
+      pointer-events: none; /* desativa eventos na área toda */
+    }
+    .overlay-label {
+      /* ...existing code... */
+      pointer-events: auto; /* só o label é interativo */
+    }
+    .interactive-overlay .overlay-image-hitbox {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 587px;
+      z-index: 3;
+      cursor: pointer;
+      background: transparent;
+      pointer-events: auto;
+    }
+    .video-section {
+      flex: 1;
+    }
+    .video-container {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+      min-height: 300px;
+      position: relative;
+    }
+    .spectrum-gif {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 6px;
+      display: none;
+    }
+    .video-placeholder {
+      color: #666;
+    }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <h1>Monitoramento da Transição Polimórfica do Bezafibrato por Espectroscopia Raman e Quimiometria</h1>
+        <p>Uma Abordagem Aplicada ao Controle de Qualidade Farmacêutico</p>
+        <p><strong>Autores: Bruno A. Borges; Paulo N. de Souza; Javier Ellena; Renato L. Carneiro.</strong></p>
+    </header>
+
+    <div class="container">
+
+        <!-- Slide 0: Capa com QR Code -->
+        <div class="slide active" id="slide-0">
+            <div class="cover-slide">
+                <p>Leia o QR code abaixo para acompanhar a apresentação do seu celular.</p>
+                <img src="qrcode_placeholder.png" alt="QR Code para acompanhar a apresentação" style="width: 200px; height: 200px;">
+            </div>
+        </div>
+
+        <!-- Slide 2: Introdução ao Bezafibrato -->
+        <div class="slide" id="slide-2">
+            <h2>1. Introdução ao Bezafibrato</h2>
+            <div class="flex-container" style="align-items: flex-start;">
+                <div class="text">
+                    <p style="margin-bottom: 2.5em;">O <strong>Bezafibrato</strong> é um fármaco essencial no tratamento de dislipidemias, classificado na <strong>Classe II do Sistema de Classificação Biofarmacêutica (BCS)</strong>. Isso indica sua alta permeabilidade, mas notável baixa solubilidade em água.</p>
+                    <div style="margin-bottom: 1.5em;">
+                        <img src="bezafibrato.png" alt="Estrutura do Bezafibrato" style="max-width: 70%; height: auto; display: block; margin: 0 auto 0.5em auto; box-shadow: 0 6px 12px rgba(0,0,0,0.15); border-radius: 8px;">
+                        <p class="caption">Figura 1: Estrutura molecular do Bezafibrato.</p>
+                    </div>
+                </div>
+                <div class="image">
+                    <img src="Classificação BSC.png" alt="Classificação BCS" style="max-width: 460px;">
+                    <p class="caption">Figura 2: Sistema de Classificação Biofarmacêutica (BCS), ilustrando as classes de fármacos baseadas em solubilidade e permeabilidade.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: O Fenômeno do Polimorfismo -->
+        <div class="slide" id="slide-3">
+            <h2>2. O Fenômeno do Polimorfismo</h2>
+            <div class="flex-container">
+                <div class="text">
+                    <p>A compreensão do <strong>polimorfismo</strong> é crucial para fármacos pouco solúveis. Polimorfos são diferentes formas cristalinas da mesma substância, que, apesar de idêntica composição química, exibem propriedades físico-químicas distintas, como solubilidade, taxa de dissolução e estabilidade. Essas variações podem impactar diretamente a biodisponibilidade e a eficácia terapêutica do medicamento.</p>
+                </div>
+            </div>
+            <div class="polymorphism-forms">
+                <div class="form-type">
+                    <h3>Forma α</h3>
+                    <img src="alpha-comfundo.png" alt="Imagem da Forma α" style="max-width: 440px; margin-bottom: 1em;">
+                </div>
+                <div class="form-type">
+                    <h3>Forma β</h3>
+                    <img src="beta-comfundo.png" alt="Imagem da Forma β" style="max-width: 440px; margin-bottom: 1em;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Objetivo do Estudo -->
+        <div class="slide" id="slide-4">
+            <h2>3. Objetivo do Estudo</h2>
+            <div class="flex-container">
+                <div class="text" style="font-size: 1.2em; text-align: justify;">
+                    <p>Este trabalho teve como objetivo principal investigar detalhadamente a transição polimórfica do bezafibrato, especificamente da forma metaestável β para a forma estável α, em função das variações de temperatura utilizando espectometria Raman e técnicas quimiométricas.</p>
+                </div>
+                <div class="image">
+                    <img src="objetivo_explicativo.png" alt="Ilustração da abordagem Raman e PCA" style="max-height: 400px; object-fit: contain;">
+                    <p class="caption">Esquema da abordagem Raman e PCA para monitoramento de transição polimórfica.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Metodologia: Pré-processamento -->
+        <div class="slide" id="slide-5">
+            <h2>4. Metodologia: Pré-processamento de Dados Raman</h2>
+            <div class="flex-container">
+                <div class="text">
+                    <p>Para otimizar a análise quimiométrica, os dados brutos dos espectros Raman foram submetidos a um rigoroso processo de pré-processamento. Essas etapas são cruciais para remover ruídos, variações instrumentais e realçar as informações químicas relevantes:</p>
+                    <ul>
+                        <li><strong>Derivação:</strong> Elimina linhas de base e resolve picos sobrepostos.</li>
+                        <li><strong>Normalização:</strong> Corrige variações de intensidade não relacionadas à concentração.</li>
+                        <li><strong>Centragem na Média:</strong> Prepara os dados para a PCA, removendo a média de cada variável.</li>
+                    </ul>
+                </div>
+            </div>
+            <h3 style="text-align: center; margin-top: 2rem; color: #004080;">Esquema de Pré-processamento dos Dados Espectrais</h3>
+            <div class="preprocessing-scheme" style="align-items: stretch;">
+                <div class="step" style="display: flex; flex-direction: column; justify-content: center;">
+                    <img src="dadosBrutos.png" alt="Dados Brutos" style="max-width: 420px;">
+                    <p class="caption">Espectros Raman Brutos.</p>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; align-self: flex-start; margin-top: 20px;">
+                    <div style="font-size: 1em; margin-bottom: 0.1em; text-align: center; color: #004080; font-weight: 600;">
+                        Derivação<br>
+                        Normalização<br>
+                        Centragem na Média
+                    </div>
+                    <div class="arrow" style="font-size: 4em; line-height: 1; text-align: center; margin-top: 0.1em;">
+                        ➔
+                    </div>
+                </div>
+                <div class="step" style="display: flex; flex-direction: column; justify-content: center;">
+                    <img src="pré processado.png" alt="Dados Pré-processados" style="max-width: 420px;">
+                    <p class="caption">Espectros Raman Pré-processados.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Resultados - Espectros Raman Interativo -->
+ <div class="slide" id="slide-6">
+  <h2>5. Resultados - Espectros Raman Interativo</h2>
+  <div class="interactive-spectra-container">
+
+    <div class="spectra-section">
+      <img src="espectros.png" alt="Espectros Raman" class="background-spectra">
+      <!-- Overlays com imagens numeradas -->
+      <div class="interactive-overlay" data-video="645" style="left: 6.3%;">
+        <div class="overlay-label" data-video="645">645</div>
+      <img src="linha.png" class="overlay-image" id="img-645">
+      <div class="overlay-image-hitbox" data-video="645"></div>
+      </div>
+      <div class="interactive-overlay" data-video="745" style="left: 8.9%;">
+        <div class="overlay-label" data-video="745">745</div>
+      <img src="linha.png" class="overlay-image" id="img-745">
+      <div class="overlay-image-hitbox" data-video="745"></div>
+      </div>
+      <div class="interactive-overlay" data-video="871" style="left: 11.9%;">
+        <div class="overlay-label" data-video="871">871</div>
+      <img src="linha.png" class="overlay-image" id="img-871">
+      <div class="overlay-image-hitbox" data-video="871"></div>
+      </div>
+      <div class="interactive-overlay" data-video="1037" style="left: 16.0%;">
+        <div class="overlay-label" data-video="1037">1037</div>
+      <img src="linha.png" class="overlay-image" id="img-1037">
+      <div class="overlay-image-hitbox" data-video="1037"></div>
+      </div>
+      <div class="interactive-overlay" data-video="1097" style="left: 17.5%;">
+        <div class="overlay-label" data-video="1097">1097</div>
+      <img src="linha.png" class="overlay-image" id="img-1097">
+      <div class="overlay-image-hitbox" data-video="1097"></div>
+      </div>
+      <div class="interactive-overlay" data-video="1212" style="left: 20.2%;">
+        <div class="overlay-label" data-video="1212">1212</div>
+      <img src="linha.png" class="overlay-image" id="img-1212">
+      <div class="overlay-image-hitbox" data-video="1212"></div>
+      </div>
+      <div class="interactive-overlay" data-video="1321" style="left: 23.0%;">
+        <div class="overlay-label" data-video="1321">1321</div>
+      <img src="linha.png" class="overlay-image" id="img-1321">
+      <div class="overlay-image-hitbox" data-video="1321"></div>
+      </div>
+      <div class="interactive-overlay" data-video="1450" style="left: 26.0%;">
+        <div class="overlay-label" data-video="1450">1450</div>
+      <img src="linha.png" class="overlay-image" id="img-1450">
+      <div class="overlay-image-hitbox" data-video="1450"></div>
+      </div>
+      <div class="interactive-overlay" data-video="1560" style="left: 28.9%;">
+        <div class="overlay-label" data-video="1560">1560</div>
+      <img src="linha.png" class="overlay-image" id="img-1560">
+      <div class="overlay-image-hitbox" data-video="1560"></div>
+      </div>
+      <div class="interactive-overlay" data-video="1599" style="left: 29.7%;">
+        <div class="overlay-label" data-video="1599">1599</div>
+      <img src="linha.png" class="overlay-image" id="img-1599">
+      <div class="overlay-image-hitbox" data-video="1599"></div>
+      </div>
+      <div class="interactive-overlay" data-video="1729" style="left: 33.1%;">
+        <div class="overlay-label" data-video="1729">1729</div>
+      <img src="linha.png" class="overlay-image" id="img-1729">
+      <div class="overlay-image-hitbox" data-video="1729"></div>
+      </div>
+      <div class="interactive-overlay" data-video="2949" style="left: 62.9%;">
+        <div class="overlay-label" data-video="2949">2949</div>
+      <img src="linha.png" class="overlay-image" id="img-2949">
+      <div class="overlay-image-hitbox" data-video="2949"></div>
+      </div>
+      <div class="interactive-overlay" data-video="3009" style="left: 64.4%;">
+        <div class="overlay-label" data-video="3009">3009</div>
+      <img src="linha.png" class="overlay-image" id="img-3009">
+      <div class="overlay-image-hitbox" data-video="3009"></div>
+      </div>
+      <div class="interactive-overlay" data-video="3072" style="left: 66.1%;">
+        <div class="overlay-label" data-video="3072">3072</div>
+      <img src="linha.png" class="overlay-image" id="img-3072">
+      <div class="overlay-image-hitbox" data-video="3072"></div>
+      </div>
+      <div class="interactive-overlay" data-video="3369" style="left: 73.2%;">
+        <div class="overlay-label" data-video="3369">3369</div>
+      <img src="linha.png" class="overlay-image" id="img-3369">
+      <div class="overlay-image-hitbox" data-video="3369"></div>
+    <style>
+      .overlay-label {
+        position: absolute;
+        top: -32px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        color: #fff;
+        padding: 2px 10px;
+        border-radius: 8px;
+        font-size: 1.1em;
+        font-weight: 600;
+        pointer-events: auto;
+        cursor: pointer;
+        z-index: 2;
+        transition: background 0.2s, opacity 0.2s;
+        user-select: none;
+        opacity: 0;
+        visibility: hidden;
+      }
+      .interactive-overlay:hover .overlay-label,
+      .overlay-label:hover {
+        opacity: 1;
+        visibility: visible;
+        background: #ff8c00;
+        color: #fff;
+      }
+    </style>
+      </div>
+    </div>
+
+    <div class="video-section">
+      <div class="video-container" id="video-container">
+        <p class="video-placeholder">Passe o mouse sobre o espectro para visualizar as vibrações/estiramentos moleculares.</p>
+        <img id="gif-645" class="spectrum-gif" src="645.gif">
+        <img id="gif-745" class="spectrum-gif" src="745.gif">
+        <img id="gif-871" class="spectrum-gif" src="871.gif">
+        <img id="gif-1037" class="spectrum-gif" src="1037.gif">
+        <img id="gif-1097" class="spectrum-gif" src="1097.gif">
+        <img id="gif-1212" class="spectrum-gif" src="1212.gif">
+        <img id="gif-1321" class="spectrum-gif" src="1321.gif">
+        <img id="gif-1450" class="spectrum-gif" src="1450.gif">
+        <img id="gif-1560" class="spectrum-gif" src="1560.gif">
+        <img id="gif-1599" class="spectrum-gif" src="1599.gif">
+        <img id="gif-1729" class="spectrum-gif" src="1729.gif">
+        <img id="gif-2949" class="spectrum-gif" src="2949.gif">
+        <img id="gif-3009" class="spectrum-gif" src="3009.gif">
+        <img id="gif-3072" class="spectrum-gif" src="3072.gif">
+        <img id="gif-3369" class="spectrum-gif" src="3369.gif">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Nova lógica: hitbox reduzida para hover
+  const overlays = document.querySelectorAll('.interactive-overlay');
+  const gifs = document.querySelectorAll('.spectrum-gif');
+  const overlayImages = document.querySelectorAll('.overlay-image');
+  const hitboxes = document.querySelectorAll('.overlay-image-hitbox');
+
+  hitboxes.forEach(hitbox => {
+    const video = hitbox.getAttribute('data-video');
+    const gifElement = document.getElementById(`gif-${video}`);
+    const imgElement = document.getElementById(`img-${video}`);
+    hitbox.addEventListener('mouseenter', () => {
+      gifs.forEach(g => g.style.display = 'none');
+      overlayImages.forEach(i => i.style.display = 'none');
+      gifElement.style.display = 'block';
+      imgElement.style.display = 'block';
+    });
+    hitbox.addEventListener('mouseleave', () => {
+      gifElement.style.display = 'none';
+      imgElement.style.display = 'none';
+    });
+  });
+</script>
+
+
+        <!-- Slide 7: Resultados - PCA -->
+        <div class="slide" id="slide-7">
+            <h2>6. Resultados: Análise de Componentes Principais (PCA)</h2>
+            <div class="flex-container">
+                <div class="image">
+                    <img src="pc1 x pc2 - bezafibrato-aquecimento.png" alt="Gráfico de escores PCA">
+                    <p class="caption">Figura 4: Gráfico de escores (PC1 vs PC2) da PCA, mostrando a separação clara entre as formas polimórficas do bezafibrato.</p>
+                </div>
+                <div class="text">
+                    <p>A PCA permitiu uma distinção robusta entre as formas polimórficas, revelando três grupos:</p>
+                    <ul>
+                        <li><strong>Forma β:</strong> Identificada em vermelho.</li>
+                        <li><strong>Forma α:</strong> Representada em verde.</li>
+                        <li><strong>Forma Intermediária:</strong> Em preto (140°C e 145°C), indicando o ponto de transição.</li>
+                    </ul>
+                    <p>A análise detalhada dos espectros Raman confirmou picos característicos para cada forma, como o pico intenso da forma β em 1037 cm⁻¹.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Conclusões -->
+        <div class="slide" id="slide-8">
+            <h2>7. Conclusões e Impacto</h2>
+            <p>A integração da <strong>Espectroscopia Raman com a Quimiometria</strong> é uma ferramenta promissora para o controle de qualidade farmacêutico, especialmente no monitoramento de polimorfos.</p>
+            <p>Vantagens:</p>
+            <ul>
+                <li><strong>Rapidez:</strong> Análises em tempo real.</li>
+                <li><strong>Não destrutiva:</strong> Preserva a amostra.</li>
+                <li><strong>Versatilidade:</strong> Aplicável diretamente em amostras sólidas.</li>
+            </ul>
+            <p>Esta metodologia permite identificar e quantificar polimorfos, garantindo qualidade e eficácia do produto final.</p>
+        </div>
+
+        <!-- Slide 9: Referências e Material de Apoio -->
+        <div class="slide references" id="slide-9">
+            <h2>8. Referências e Material de Apoio</h2>
+            <p><strong>Artigos Científicos:</strong></p>
+            <ol>
+                <li id="ref1"><a href="https://www.researchgate.net/publication/260388907_Drug_Polymorphism_A_Review" target="_blank">Saifee, M., et al. "Drug polymorphism: A review". <em>International Journal of Health Research</em>, 2009.</a></li>
+                <li id="ref2"><a href="https://pubs.acs.org/doi/10.1021/cg8011298" target="_blank">Lemmerer, A., et al. "Concomitant Polymorphs of the Antihyperlipoproteinemic Bezafibrato". <em>Crystal Growth & Design</em>, 2009.</a></li>
+            </ol>
+            <p><strong>Patente Relacionada:</strong></p>
+            <ul>
+                <li><a href="https://patents.google.com/patent/EP0625504A1/en?oq=EP0625504A1" target="_blank">Patente EP 0 625 504 A1 - Forma estável e cristalina de β-Bezafibrato.</a></li>
+            </ul>
+            <p><strong>Materiais Adicionais:</strong></p>
+            <ul>
+                <li><a href="https://pubs.acs.org/doi/abs/10.1021/cg101556s" target="_blank">Pharmaceutical Crystallization</a></li>
+                <li><a href="https://journals.iucr.org/paper?al0292" target="_blank">Structure of α-Bezafibrato</a></li>
+                <li><a href="https://ir.cheminfo.org/" target="_blank">IRCalc: Making molecules vibrate</a></li>
+            </ul>
+        </div>
+
+        <!-- Slide 10: Agradecimentos -->
+        <div class="slide" id="slide-10">
+            <h2>9. Agradecimentos</h2>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 32px; margin-bottom: 1.5em; flex-wrap: wrap;">
+                <img src="cnpq-logo.png" alt="CNPq" style="height: 90px; width: auto; max-width: 220px; object-fit: contain;">
+                <img src="fapesp-logo.png" alt="FAPESP" style="height: 90px; width: auto; max-width: 220px; object-fit: contain;">
+                <img src="ufscar-logo.png" alt="UFSCar" style="height: 90px; width: auto; max-width: 220px; object-fit: contain;">
+                <img src="eiq-logo.png" alt="EIQ" style="height: 90px; width: auto; max-width: 220px; object-fit: contain;">
+            </div>
+            <p>Agradecemos sinceramente à 7ª Escola de Inverno de Quimiometria - 2025 pela valiosa oportunidade de apresentar os resultados deste trabalho. Nosso reconhecimento se estende a todos os colaboradores envolvidos na pesquisa e às agências de fomento que, com seu apoio, tornaram este estudo possível.</p>
+        </div>
+
+        <!-- Navegação dos slides -->
+        <div class="slide-nav">
+            <button id="prevBtn">Voltar</button>
+            <button id="nextBtn">Avançar</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>7ª Escola de Inverno de Quimiometria - 2025.</p>
+    </footer>
+
+    <script>
+        const slides = document.querySelectorAll(".slide");
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle("active", i === index);
+            });
+            prevBtn.disabled = index === 0;
+            nextBtn.disabled = index === slides.length - 1;
+        }
+
+        prevBtn.addEventListener("click", () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        });
+
+        nextBtn.addEventListener("click", () => {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        });
+
+        // Inicializa
+        showSlide(currentSlide);
+        
+        // Funcionalidade interativa para o slide de espectros (sem canvas/CORS)
+        document.addEventListener('DOMContentLoaded', function() {
+            const overlays = document.querySelectorAll('.interactive-overlay');
+            const videoContainer = document.getElementById('video-container');
+            const videoPlaceholder = document.querySelector('.video-placeholder');
+            const allGifs = document.querySelectorAll('.spectrum-gif');
+            
+            overlays.forEach(overlay => {
+                overlay.addEventListener('mouseenter', function() {
+                    const gifId = this.getAttribute('data-video');
+                    const targetGif = document.getElementById(`gif-${gifId}`);
+                    // Esconde placeholder e outros GIFs
+                    videoPlaceholder.style.display = 'none';
+                    allGifs.forEach(gif => {
+                        gif.style.display = 'none';
+                    });
+                    // Mostra o GIF correspondente
+                    if (targetGif) {
+                        targetGif.style.display = 'block';
+                    }
+                });
+                overlay.addEventListener('mouseleave', function() {
+                    // Esconde todos os GIFs e mostra placeholder
+                    allGifs.forEach(gif => {
+                        gif.style.display = 'none';
+                    });
+                    videoPlaceholder.style.display = 'block';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

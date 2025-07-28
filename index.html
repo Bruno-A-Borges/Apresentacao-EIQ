@@ -421,18 +421,18 @@
     <div class="container">
 
         <!-- Slide 0: Capa com QR Code -->
-        <div class="slide active" id="slide-0">
+        <div class="slide active" id="slide-1">
             <div class="cover-slide">
-                <p>Leia o QR code abaixo para acompanhar a apresentação do seu celular.</p>
+                <p style="text-align: justify;">Leia o QR code abaixo para acompanhar a apresentação do seu celular.</p>
                 <img src="qrcode.png" alt="QR Code para acompanhar a apresentação" style="width: 400px; height: 400px;">
             </div>
         </div>
 
-        <!-- Slide 2: Introdução ao Bezafibrato -->
+        <!-- Slide 1: Introdução ao Bezafibrato -->
         <div class="slide" id="slide-2">
             <h2>1. Introdução ao Bezafibrato</h2>
             <div class="flex-container" style="align-items: flex-start;">
-                <div class="text">
+                <div class="text" style="text-align: justify;">
                     <p style="margin-bottom: 2.5em;">O <strong>Bezafibrato</strong> é um fármaco essencial no tratamento de dislipidemias, classificado na <strong>Classe II do Sistema de Classificação Biofarmacêutica (BCS)</strong>. Isso indica sua alta permeabilidade, mas notável baixa solubilidade em água.</p>
                     <div style="margin-bottom: 1.5em;">
                         <img src="bezafibrato.png" alt="Estrutura do Bezafibrato" style="max-width: 70%; height: auto; display: block; margin: 0 auto 0.5em auto; box-shadow: 0 6px 12px rgba(0,0,0,0.15); border-radius: 8px;">
@@ -446,12 +446,12 @@
             </div>
         </div>
 
-        <!-- Slide 3: O Fenômeno do Polimorfismo -->
+        <!-- Slide 2: O Fenômeno do Polimorfismo -->
         <div class="slide" id="slide-3">
             <h2>2. O Fenômeno do Polimorfismo</h2>
             <div class="flex-container">
                 <div class="text">
-                    <p>A compreensão do <strong>polimorfismo</strong> é crucial para fármacos pouco solúveis. Polimorfos são diferentes formas cristalinas da mesma substância, que, apesar de idêntica composição química, exibem propriedades físico-químicas distintas, como solubilidade, taxa de dissolução e estabilidade. Essas variações podem impactar diretamente a biodisponibilidade e a eficácia terapêutica do medicamento.</p>
+                    <p>A compreensão do <strong>polimorfismo</strong> é crucial para fármacos pouco solúveis. Polimorfos são diferentes formas cristalinas da mesma substância, que, apesar de idêntica composição química, exibem propriedades físico-químicas distintas, como taxa de dissolução e estabilidade química e física. Essas variações podem impactar diretamente a biodisponibilidade e a eficácia terapêutica do medicamento.</p>
                 </div>
             </div>
             <div class="polymorphism-forms">
@@ -466,7 +466,7 @@
             </div>
         </div>
 
-        <!-- Slide 4: Objetivo do Estudo -->
+        <!-- Slide 3: Objetivo do Estudo -->
         <div class="slide" id="slide-4">
             <h2>3. Objetivo do Estudo</h2>
             <div class="flex-container">
@@ -480,16 +480,16 @@
             </div>
         </div>
 
-        <!-- Slide 5: Metodologia: Pré-processamento -->
+        <!-- Slide 4: Metodologia: Pré-processamento -->
         <div class="slide" id="slide-5">
             <h2>4. Metodologia: Pré-processamento de Dados Raman</h2>
             <div class="flex-container">
                 <div class="text">
                     <p>Para otimizar a análise quimiométrica, os dados brutos dos espectros Raman foram submetidos a um rigoroso processo de pré-processamento. Essas etapas são cruciais para remover ruídos, variações instrumentais e realçar as informações químicas relevantes:</p>
                     <ul>
-                        <li><strong>Derivação:</strong> Elimina linhas de base e resolve picos sobrepostos.</li>
+                        <li><strong>1ª Derivada:</strong> Elimina offset e destaca picos sobrepostos.</li>
                         <li><strong>Normalização:</strong> Corrige variações de intensidade não relacionadas à concentração.</li>
-                        <li><strong>Centragem na Média:</strong> Prepara os dados para a PCA, removendo a média de cada variável.</li>
+                        <li><strong>Centragem na Média:</strong> Subtrai de cada dado a média da variável a fim de destacar a variância relacionada às diferença.</li>
                     </ul>
                 </div>
             </div>
@@ -516,7 +516,7 @@
             </div>
         </div>
 
-        <!-- Slide 6: Resultados - Espectros Raman Interativo -->
+        <!-- Slide 5: Resultados - Espectros Raman Interativo -->
  <div class="slide" id="slide-6">
   <h2>5. Resultados - Espectros Raman Interativo</h2>
   <div class="interactive-spectra-container">
@@ -705,15 +705,15 @@
 </script>
 
 
-        <!-- Slide 7: Resultados - PCA -->
+        <!-- Slide 6: Resultados - PCA -->
         <div class="slide" id="slide-7">
             <h2>6. Resultados: Análise de Componentes Principais (PCA)</h2>
             <div class="flex-container">
                 <div class="image">
                     <img src="pc1 x pc2 - bezafibrato-aquecimento.png" alt="Gráfico de escores PCA">
-                    <p class="caption">Figura 4: Gráfico de escores (PC1 vs PC2) da PCA, mostrando a separação clara entre as formas polimórficas do bezafibrato.</p>
+                    <p class="caption" style="text-align: justify;">Figura 3: Gráfico de escores (PC1 vs PC2) da PCA, mostrando a separação clara entre as formas polimórficas do bezafibrato.</p>
                 </div>
-                <div class="text">
+                <div class="text" style="text-align: justify;">
                     <p>A PCA permitiu uma distinção robusta entre as formas polimórficas, revelando três grupos:</p>
                     <ul>
                         <li><strong>Forma β:</strong> Identificada em vermelho.</li>
@@ -725,9 +725,28 @@
             </div>
         </div>
 
-        <!-- Slide 8: Conclusões -->
+        <!-- Slide 7: etapa atual -->
         <div class="slide" id="slide-8">
-            <h2>7. Conclusões e Impacto</h2>
+            <h2>7. Etapa em andamento</h2>
+            <div class="flex-container">
+                <div class="image">
+                    <img src="crystals.png" alt="Diferentes hábitos cristalinos dos polimorfos" style="max-width: 350px;">
+                    <p class="caption">Figura 4: Diferentes hábitos cristalinos dos polimorfos. (a) Forma-α; (b) Forma-β; Figuras (c) e (d) mostram ambas as formas, em forma de agulha e em forma de bloco, cultivadas concomitantemente a partir de 2-butanona. (Fonte: "Concomitant Polymorphs of the Antihyperlipoproteinemic Bezafibrate") </p>
+                </div>
+                <div class="text" style="display: flex; align-items: center; justify-content: center; min-height: 250px; text-align: justify; flex-direction: column;">
+                    <p style="font-size: 1.08em; width: 100%;">Atualmente o desafio está no escalonamento da produção de β-Bezafibrato para análises mais profundas e o desenvolvimento de um modelo capaz de separar e quantificar cada polimorfo em produtos acabados.</p>
+                    <p style="margin-top: 1.2em; font-size: 1.08em; width: 100%;">Existem na literatura dois métodos para a produção desse polimorfo:</p>
+                    <ul style="margin-top: 1.5em; align-self: flex-start;">
+                        <li><strong>Método patenteado:</strong> Usa uma mistura de água, 2-butanona e 1-butanol.</li>
+                        <li><strong>Método de Lemmerer, et al.:</strong> Usa uma mistura equimolar do IFA com isonicotinamida em 2-butanona.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Conclusões -->
+        <div class="slide" id="slide-9">
+            <h2>8. Conclusões e Impacto</h2>
             <p>A integração da <strong>Espectroscopia Raman com a Quimiometria</strong> é uma ferramenta promissora para o controle de qualidade farmacêutico, especialmente no monitoramento de polimorfos.</p>
             <p>Vantagens:</p>
             <ul>
@@ -739,12 +758,12 @@
         </div>
 
         <!-- Slide 9: Referências e Material de Apoio -->
-        <div class="slide references" id="slide-9">
-            <h2>8. Referências e Material de Apoio</h2>
+        <div class="slide references" id="slide-10">
+            <h2>9. Referências e Material de Apoio</h2>
             <p><strong>Artigos Científicos:</strong></p>
             <ol>
                 <li id="ref1"><a href="https://www.researchgate.net/publication/260388907_Drug_Polymorphism_A_Review" target="_blank">Saifee, M., et al. "Drug polymorphism: A review". <em>International Journal of Health Research</em>, 2009.</a></li>
-                <li id="ref2"><a href="https://pubs.acs.org/doi/10.1021/cg8011298" target="_blank">Lemmerer, A., et al. "Concomitant Polymorphs of the Antihyperlipoproteinemic Bezafibrato". <em>Crystal Growth & Design</em>, 2009.</a></li>
+                <li id="ref2"><a href="https://pubs.acs.org/doi/10.1021/cg8011298" target="_blank">Lemmerer, A., et al. "Concomitant Polymorphs of the Antihyperlipoproteinemic Bezafibrate". <em>Crystal Growth & Design</em>, 2009.</a></li>
             </ol>
             <p><strong>Patente Relacionada:</strong></p>
             <ul>
@@ -755,19 +774,20 @@
                 <li><a href="https://pubs.acs.org/doi/abs/10.1021/cg101556s" target="_blank">Pharmaceutical Crystallization</a></li>
                 <li><a href="https://journals.iucr.org/paper?al0292" target="_blank">Structure of α-Bezafibrato</a></li>
                 <li><a href="https://ir.cheminfo.org/" target="_blank">IRCalc: Making molecules vibrate</a></li>
+                <li><a href="https://github.com/Bruno-A-Borges/Apresentacao-EIQ" target="_blank">Códigos da apresentação</a></li>
             </ul>
         </div>
 
         <!-- Slide 10: Agradecimentos -->
-        <div class="slide" id="slide-10">
+        <div class="slide" id="slide-11">
             <h2>9. Agradecimentos</h2>
             <div style="display: flex; justify-content: center; align-items: center; gap: 32px; margin-bottom: 1.5em; flex-wrap: wrap;">
                 <img src="cnpq-logo.png" alt="CNPq" style="height: 90px; width: auto; max-width: 220px; object-fit: contain;">
-                <img src="fapesp-logo.png" alt="FAPESP" style="height: 90px; width: auto; max-width: 220px; object-fit: contain;">
+                <img src="FAPESP-Logo.png" alt="FAPESP" style="height: 90px; width: auto; max-width: 220px; object-fit: contain;">
                 <img src="ufscar-logo.png" alt="UFSCar" style="height: 90px; width: auto; max-width: 220px; object-fit: contain;">
                 <img src="eiq-logo.png" alt="EIQ" style="height: 90px; width: auto; max-width: 220px; object-fit: contain;">
             </div>
-            <p>Agradecemos sinceramente à 7ª Escola de Inverno de Quimiometria - 2025 pela valiosa oportunidade de apresentar os resultados deste trabalho. Nosso reconhecimento se estende a todos os colaboradores envolvidos na pesquisa e às agências de fomento que, com seu apoio, tornaram este estudo possível.</p>
+            <p>Agradecemos sinceramente à comissão organizadora da Escola de Inverno de Quimiometria - 2025 pela valiosa oportunidade de apresentar os resultados deste trabalho. Essa pesquisa foi realizada com apoio do CNPq, Conselho Nacional de Desenvolvimento Científico e Tecnológico - Brasil (140473/2024-6) e (312505/2021-3) assim como da Fundação de Apoio a Pesquisas do Estado de São Paulo - FAPESP (2017/15850-0).</p>
         </div>
 
         <!-- Navegação dos slides -->
@@ -775,6 +795,11 @@
             <button id="prevBtn">Voltar</button>
             <button id="nextBtn">Avançar</button>
         </div>
+
+    <!-- Numeração dos slides -->
+    <div id="slide-number" style="position: fixed; bottom: 18px; right: 32px; background: rgba(0,0,0,0.7); color: #fff; padding: 7px 18px; border-radius: 16px; font-size: 1.1em; font-family: 'Montserrat', sans-serif; z-index: 1000; pointer-events: none; box-shadow: 0 2px 8px rgba(0,0,0,0.18);">
+        1/10
+    </div>
     </div>
 
     <footer>
@@ -782,6 +807,14 @@
     </footer>
 
     <script>
+        // Numeração dos slides
+        const slideNumberDiv = document.getElementById('slide-number');
+        function updateSlideNumber() {
+            // Só conta slides visíveis (não .references)
+            const visibleSlides = Array.from(document.querySelectorAll('.slide'));
+            const total = visibleSlides.length;
+            slideNumberDiv.textContent = `${currentSlide + 1}/${total}`;
+        }
         const slides = document.querySelectorAll(".slide");
         const prevBtn = document.getElementById("prevBtn");
         const nextBtn = document.getElementById("nextBtn");
@@ -793,6 +826,7 @@
             });
             prevBtn.disabled = index === 0;
             nextBtn.disabled = index === slides.length - 1;
+            updateSlideNumber();
         }
 
         prevBtn.addEventListener("click", () => {
@@ -811,6 +845,7 @@
 
         // Inicializa
         showSlide(currentSlide);
+        updateSlideNumber();
         
         // Funcionalidade interativa para o slide de espectros (sem canvas/CORS)
         document.addEventListener('DOMContentLoaded', function() {
